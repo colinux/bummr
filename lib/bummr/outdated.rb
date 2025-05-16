@@ -13,6 +13,7 @@ module Bummr
       bundle_options << " --parseable" if Gem::Version.new(Bundler::VERSION) >= Gem::Version.new("2")
       bundle_options << " --strict" unless options[:all_gems]
       bundle_options << " --group #{options[:group]}" if options[:group]
+      bundle_options << " --minor" if options[:minor]
       bundle_options << " #{options[:gem]}" if options[:gem]
 
       Open3.popen2("bundle outdated" + bundle_options) do |_std_in, std_out|

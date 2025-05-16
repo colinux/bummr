@@ -18,12 +18,14 @@ module Bummr
       "--all: Update indirect dependencies\n" +
       "--group: Specify a group from the Gemfile to update\n" +
       "--gem: Specify a specific gem to update\n" +
+      "--minor: Update only minor versions\n" +
       "\n"
 
 
     method_option :all, type: :boolean, default: false
     method_option :group, type: :string
     method_option :gem, type: :string
+    method_option :minor, type: :boolean, default: false
 
     def update
       system("bundle install")
@@ -34,7 +36,8 @@ module Bummr
         log("Bummr update initiated #{Time.now}")
 
         outdated_gems = Bummr::Outdated.instance.outdated_gems(
-          all_gems: options[:all], group: options[:group], gem: options[:gem]
+          all_gems: options[:all], group: options[:group], gem: options[:gem],
+          minor: options[:minor]
         )
 
         if outdated_gems.empty?

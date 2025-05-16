@@ -22,9 +22,9 @@ module Bummr
       updated_version = updated_version_for(gem)
 
       message = if updated_version
-        "Update #{gem[:name]} from #{gem[:installed]} to #{updated_version}"
+        "chore(bundle): bump #{gem[:name]} from #{gem[:installed]} to #{updated_version}"
       else
-        "Update dependencies for #{gem[:name]}"
+        "chore(bundle): bump #{gem[:name]}"
       end
 
       if gem[:installed] == updated_version
